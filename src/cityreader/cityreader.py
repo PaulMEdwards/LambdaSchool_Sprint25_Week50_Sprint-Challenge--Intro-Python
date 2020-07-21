@@ -38,21 +38,11 @@ def cityreader(cities=[]):
 
   import csv
 
-  fields = []
-  interim_cities = []
-
   with open('cities.csv') as csv_file:
-    csv_reader = csv.reader(csv_file)
-    fields = next(csv_reader)
-    # print(fields)
+    f = csv.DictReader(csv_file)
 
-    for row in csv_reader:
-      interim_cities.append(row)
-  
-    # print(interim_cities)
-
-    for c in interim_cities:
-      cities.append(City(c[0], float(c[3]), float(c[4])))
+    for r in f:
+      cities.append(City(r['city'], float(r['lat']), float(r['lng'])))
 
   return cities
 
